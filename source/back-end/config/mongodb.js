@@ -25,7 +25,8 @@ const create_connection = async () => {
         // Get the mongodb certificate from Secrets Manager Service
         let cert = await secretsManagerService.getSecret({
             secretType: 'imported_cert',
-            id: process.env.SECRET_MANAGER_CERT_ID, //TODO. Validar si es correcto este ID o es de DB. Documentarlo.
+            id: process.env.SECRET_MANAGER_CERT_ID, 
+            //TODO. Validar si es correcto este ID o es de DB. Documentarlo.
         });
         
         // Create an auxiliary certificate file for the mongoose connection
@@ -44,7 +45,7 @@ const create_connection = async () => {
         
         // Store connection
         let db = mongoose.connection;
-        console.log("Starting MongoDB connection.")
+        
         // Check connection status
         // Values are: 
         //  0: disconnected
@@ -76,6 +77,7 @@ const close_connection = async () => {
     try {
         //Disconnect the mongodb database
         mongoose.connection.close();
+        console.log('Connection closed successfully')
     }catch(e){
         //console.error(e)
         next(e);
