@@ -19,30 +19,17 @@ const Flight = require("../models/flightModel");
 
 const getFlights = async (req = request, res = response) => {
     try {
-        // console.log('Searching the flight in our DB...')
         
-        // // Save info we have:
-        // //from-AAA-to-BBB-departure-mm-yyyy-dd
-
-        // const customQuery = {}
+        // Save info we have:
+        //from-AAA-to-BBB-departure-mm-yyyy-dd
         const info = req.params.customParams
 
-        // // customQuery = {
-        // //     ORIGIN_AIRPORT: info.substr(5,3),
-        // //     DESTINATION_AIRPORT: info.substr(12,3)
-        // // }
-
-        // customQuery = {
-        //     "ORIGIN_AIRPORT": "SFO",
-        //     "DESTINATION_AIRPORT": "DFW"
-        // }
-
-        // console.log(customQuery)
         console.log(info) //full
         console.log(info.length)
         console.log(info.substr(5,3))
         console.log(info.substr(12,3))
 
+        // TODO configue departure date to add in the query
         const departure = info.substr(29,4) + '-' + info.substr(26,2) + '-' + info.substr(34,2)
         console.log(departure)
 
@@ -51,9 +38,6 @@ const getFlights = async (req = request, res = response) => {
             DESTINATION_AIRPORT: info.substr(12,3),
             // DEPARTURE_DATE: /departure/i, 
         })
-
-
-
         res.json ({
             result : result
         });
@@ -77,12 +61,6 @@ const getOneFlightById = async (req = request, res = response) => {
         const { id } = req.params
 
         console.log(id)
-
-        // const flight = await Flight.find({
-        //     FLIGHT_NUMBER: 14,
-        //     ORIGIN_AIRPORT: "OGG",	
-        //     DESTINATION_AIRPORT: "LAX",
-        // })
 
         const flight = await Flight.findById(id)
 

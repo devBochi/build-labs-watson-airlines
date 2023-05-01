@@ -13,7 +13,7 @@ const getAirports = async (req = request, res = response) => {
 
     try {
         console.log('Searching for Airports in our DB...')
-        const airports = await Airport.find({}).limit(10)
+        const airports = await Airport.find({}).limit(50)
 
         // Return query result
         res.json ({
